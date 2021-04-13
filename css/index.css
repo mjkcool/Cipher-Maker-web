@@ -39,6 +39,10 @@ h1{
   color: white;
 }
 
+#plain-txt-btn:hover{
+  color:white;
+}
+
 #text-cipher{
   background-color: rgb(60, 67, 82) !important;
   color: white;
