@@ -1,13 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,500;0,700;0,900;1,500;1,700;1,900&display=swap');
 
-body{
+.body{
   font-family: 'Roboto', sans-serif;
-  background-color: rgb(49, 49, 51);
+  background-color: rgb(42, 47, 56);
+}
+
+h1{
+  /* color: white; */
+  color: white;
+}
+
+#card-dark{
+  background-color: rgb(60, 67, 82);
+  border-color: rgb(194, 197, 223);
+}
+
+.nav-link{
+  color: white;
+}
+
+.nav-pills > .nav-item > .active {
+  color: rgb(60, 67, 82) !important;
+  background-color: white !important;   
 }
 
 .card{
   max-width: 600px;
+  color: white;
 }
+
+#key{
+  background-color: rgb(60, 67, 82) !important;
+  color: white;
+}
+
+#text-plain{
+  background-color: rgb(60, 67, 82) !important;
+  color: white;
+}
+
+#text-cipher{
+  background-color: rgb(60, 67, 82) !important;
+  color: white;
+}
+
+table{
+  width: 200px !important;
+  height: 200px !important;
+}
+
 
 .nav-item{
   margin: 5px;
