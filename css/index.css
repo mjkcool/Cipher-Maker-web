@@ -49,10 +49,16 @@ h1{
 }
 
 table{
-  width: 200px !important;
-  height: 200px !important;
+  width: 230px !important;
+  height: 230px !important;
+  padding: 0;
+  color: white !important;
 }
-
+td{
+  width: 20%;
+  height: 20%;
+  padding: 0;
+}
 
 .nav-item{
   margin: 5px;
