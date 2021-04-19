@@ -1,28 +1,42 @@
 const KBSIZE = 5
 const keyInput = document.getElementById("key")
 const keysetBtn = document.getElementById("key-btn")
+const encryption_btn = document.getElementById("plain-txt-btn")
+const decryption_btn = document.getElementById("cipher-txt-btn")
+const plainInput = document.getElementById("plain-txt")
+const cipherInput = document.getElementById("cipher-txt")
 let keyboard = Array.from(Array(KBSIZE), () => new Array(KBSIZE))
+let key, raw_key
 
+let key_exi = false //암호키 입력 여부
 
-keysetBtn.addEventListener("click", keySet)
+//리스너 추가
+if(keysetBtn) keysetBtn.addEventListener("click", keySet)
+if(encryption_btn) encryption_btn.addEventListener("click", encryption)
+if(decryption_btn) decryption_btn.addEventListener("click", decryption)
 
-
-function keySet(){ //make key board
-    let key = keyInput.value.replace(/(\s*)/g, "")
-    if(!key) {
-        alert("Input Key")
-        return
-    }
-
-    key = key.toUpperCase() //대문자 변환
-    //중복제거
+function removeDupplication(key){
     let newkey = ""
     for(let i=0; i<key.length;i++){
         let exi = false
         for(let j=0; j<i; j++) if(key[i]===key[j]) exi = true
         if(exi===false) newkey += key[i]
     }
-    key = newkey
+    return newkey
+}
+
+
+function keySet(){ //make key board
+    key = keyInput.value.replace(/(\s*)/g, "")
+    if(!key) {
+        alert("Input Key")
+        key_exi = false
+        return
+    }
+    raw_key = keyInput.value
+
+    key = key.toUpperCase() //대문자 변환
+    key = removeDupplication(key) //중복제거
     
     //암호판 제작
     let keyidx
@@ -31,7 +45,7 @@ function keySet(){ //make key board
     
     for(keyidx = 0; keyidx < key.length; keyidx++){
         if(key.charAt(keyidx) == String.fromCharCode(81) || key.charAt(keyidx) == String.fromCharCode(90)){
-            if(qzexi = false){
+            if(!qzexi){
                 keyboard[i][j] = key[keyidx]
                 qzexi = true
 
@@ -76,11 +90,37 @@ function keySet(){ //make key board
     
     let boardplace = document.querySelectorAll("td")
     
+    //Key board set
     let idx = 0
     for (i = 0; i < KBSIZE; i++) {
 		for (j = 0; j < KBSIZE; j++) {
-			boardplace[idx++].innerText = keyboard[i][j]
+            let char
+            if(keyboard[i][j] == String.fromCharCode(81) || keyboard[i][j] == String.fromCharCode(90)) char = 'Q/Z'
+            else char = keyboard[i][j]
+			boardplace[idx++].innerText = char
 		}
 	}
+    key_exi = true
+}
+
+
+function encryption(){
+    if(!key_exi){ //키 입력 확인
+        alert("Input key")
+        return
+    }
+    //평문 입력 확인
+    let plain = plainInput.value
+
+}
+
+
+function decryption(){
+    if(!key_exi){ //키 입력 확인
+        alert("Input key")
+        return
+    }
+    //암호문 입력 확인
+    let cipher = cipherInput.value
 
 }
