@@ -34,9 +34,9 @@ h1{
   color: white;
 }
 
-#text-plain{
+textarea{
   background-color: rgb(60, 67, 82) !important;
-  color: white;
+  color: white !important;
 }
 
 #plain-txt-btn:hover{
