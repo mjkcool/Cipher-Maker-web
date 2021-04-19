@@ -25,8 +25,9 @@
           </li>
         </ul>
         
-        <div class="card-body" style="padding: 4%;">
-          <div class="input-group mb-3">
+        <div class="card-body" style="padding: 2% 4% 4% 4%;">
+          You have to put only English.
+          <div class="input-group my-4">
             <input id="key" type="text" class="form-control" placeholder="CIPHER KEY" aria-label="Key" aria-describedby="key-btn">
             <button class="btn btn-outline-light" type="button" id="key-btn">SET</button>
           </div>
@@ -76,31 +77,33 @@
           <div class="tab-content" id="pills-tabContent">
 
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-              <label for="text-plain" class="form-label">Plain text</label>
+              <label for="text-plain" class="form-label">Input : Plain text</label>
               <div class="input-group mb-3">
                 <textarea id="plain-txt" class="form-control" rows="2" placeholder="You can extend it with drag right bottom↘" aria-label="plain-txt" aria-describedby="plain-txt-btn"></textarea>
                 <button class="btn btn-outline-light" type="button" id="plain-txt-btn">▶</button>
               </div>
               <label for="text-plain" class="form-label">Result : Cipher text</label>
               <div class="input-group mb-3">
-                <textarea id="result-cipher-txt" class="form-control" rows="2" placeholder="You can extend it with drag right bottom↘" aria-label="result-cipher-txt" aria-describedby="plain-txt-btn" disabled></textarea>
+                <textarea id="result-cipher-txt" class="form-control" rows="2" placeholder="Will be shown here, you can copy it." aria-label="result-cipher-txt" aria-describedby="plain-txt-btn" disabled></textarea>
                 <button class="btn btn-outline-light" type="button" id="copy-cipher-btn"><img src="contents/copy-content.png" width="15px"></button>
               </div>
             </div>
 
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-              <label for="text-plain" class="form-label">Cipher text</label>
+              <label for="text-plain" class="form-label">Input : Cipher text</label>
               <div class="input-group mb-3">
-                <textarea id="cipher-txt" class="form-control" rows="2" placeholder="You can extend it with drag right bottom↘" aria-label="cipher-txt" aria-describedby="plain-txt-btn" disabled></textarea>
-                <button class="btn btn-outline-light" type="button" id="cipher-txt-btn"><img src="contents/copy-content.png" width="15px"></button>
+                <textarea id="cipher-txt" class="form-control" rows="2" placeholder="You can extend it with drag right bottom↘" aria-label="cipher-txt" aria-describedby="plain-txt-btn"></textarea>
+                <button class="btn btn-outline-light" type="button" id="cipher-txt-btn">▶</button>
               </div>
               <label for="text-plain" class="form-label">Result : Plain text</label>
               <div class="input-group mb-3">
-                <textarea id="result-plain-txt" class="form-control" rows="2" placeholder="You can extend it with drag right bottom↘" aria-label="result-plain-txt" aria-describedby="plain-txt-btn"></textarea>
-                <button class="btn btn-outline-light" type="button" id="copy-plain-btn">▶</button>
+                <textarea id="result-plain-txt" class="form-control" rows="2" placeholder="Will be shown here, you can copy it." aria-label="result-plain-txt" aria-describedby="plain-txt-btn" disabled></textarea>
+                <button class="btn btn-outline-light" type="button" id="copy-plain-btn"><img src="contents/copy-content.png" width="15px"></button>
               </div>
             </div>
           </div>
+          <!-- 초기화 버튼 -->
+          <button id="clear" type="button" class="btn btn-outline-light mt-3 mb-1">Clear all</button>
         </div>
         
       </div>

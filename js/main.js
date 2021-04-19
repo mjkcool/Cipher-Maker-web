@@ -1,10 +1,16 @@
 const KBSIZE = 5 //암호판 규격
+const R = 0, C = 1
 const keyInput = document.getElementById("key")
 const keysetBtn = document.getElementById("key-btn")
 const encryption_btn = document.getElementById("plain-txt-btn")
 const decryption_btn = document.getElementById("cipher-txt-btn")
+const cipherResult = document.getElementById("result-cipher-txt")
+const plainResult = document.getElementById("result-plain-txt")
 const plainInput = document.getElementById("plain-txt")
 const cipherInput = document.getElementById("cipher-txt")
+const clearBtn = document.getElementById("clear")
+const boardplace = document.querySelectorAll("td")
+
 let keyboard = Array.from(Array(KBSIZE), () => new Array(KBSIZE)) //암호판
 let key, raw_key
 
@@ -14,7 +20,7 @@ let key_exi = false //암호키 입력 여부
 if(keysetBtn) keysetBtn.addEventListener("click", keySet)
 if(encryption_btn) encryption_btn.addEventListener("click", encryption)
 if(decryption_btn) decryption_btn.addEventListener("click", decryption)
-
+if(clearBtn) clearBtn.addEventListener("click", clearAll)
 
 function removeDupplication(key){ //중복제거함수
     let newkey = ""
@@ -89,8 +95,6 @@ function keySet(){ //make key board
         alpbt++
     }
     
-    let boardplace = document.querySelectorAll("td")
-    
     //Key board set
     let idx = 0
     for (i = 0; i < KBSIZE; i++) {
@@ -127,7 +131,7 @@ function encryption(){
 
     let cipher_txt = '' //암호문
     let fair_i = 0
-    
+
     while(fair_i < plain.length){
         // var = [row, col]
         let left = getIndex(plain[fair_i])
@@ -135,46 +139,42 @@ function encryption(){
         //alert(`한세트 ${left} ${right}`)
 
         //어차피 같을 일이 없기 때문에 두개를 각각 비교>> 만약 행렬중 하나 인덱스가 같다면
-        if(left[0] == right[0]){
-            let val_left, val_right
-            if(left[1] < KBSIZE-1) val_left = left[1] + 1
-            else val_left = 0
-            if(right[1] < KBSIZE-1) val_right = right[1] + 1
-            else val_right = 0
-            cipher_txt += keyboard[left[0]][val_left]
-            cipher_txt += keyboard[right[0]][val_right]
+        if(left[R] == right[R]){ //row가 같다면
+            let left_col, right_col
+            if(left[C] < KBSIZE-1) left_col = left[C] + 1
+            else left_col = 0
+            if(right[C] < KBSIZE-1) right_col = right[C] + 1
+            else right_col = 0
+            cipher_txt += keyboard[left[R]][left_col]
+            cipher_txt += keyboard[right[R]][right_col]
         }
-        else if(left[1] == right[1]){
-            let val_left, val_right
-            if(left[0] < KBSIZE - 1) val_left = left[0] + 1
-            else val_left = 0
-            if(right[0] < KBSIZE - 1) val_right = left[0] +1
-            else val_right = 0
-            cipher_txt += keyboard[val_left][left[1]]
-            cipher_txt += keyboard[val_right][right[1]]
+        else if(left[C] == right[C]){ //col이 같다면
+            let left_row, right_row
+            if(left[R] < KBSIZE - 1) left_row = left[R] + 1
+            else left_row = 0
+            if(right[R] < KBSIZE - 1) right_row = right[R] + 1
+            else right_row = 0
+            cipher_txt += keyboard[left_row][left[C]]
+            cipher_txt += keyboard[right_row][right[C]]
         }
         //같은 인덱스가 없다면
         else{
-            let max_row, max_col
-            if(left[0] < right[0]) max_row = right[0]
-            else max_row = left[0]
-            cipher_txt += keyboard[max_row][left[1]]
-            if(left[1] < right[1]) max_col = right[1]
-            else max_col = left[1]
-            cipher_txt += keyboard[right[0]][max_col]
+            cipher_txt += keyboard[right[R]][left[C]]
+            cipher_txt += keyboard[left[R]][right[C]]
         }
         
         fair_i += 2
     }
 
-    alert(cipher_txt)
+    cipherResult.value = cipher_txt
+
     
 }
 
 function getIndex(c){
     for(let i=0; i<KBSIZE; i++){
         for(let j=0; j<KBSIZE; j++){
-            if(keyboard[i][j] == c) {
+            if(keyboard[i][j].includes(c)) {
                 return [i, j]
             }
         }
@@ -216,4 +216,20 @@ function decryption(){
     cipher.toUpperCase() //대문자 변환
     
 
+}
+
+function clearAll(){
+    let idx = 0
+    //암호판 지우기
+    for(let i=0; i<KBSIZE; i++){ 
+        for(let j=0; j<KBSIZE; j++){
+            boardplace[idx++].value = null
+        }
+    }
+    //모든 input 칸 지우기
+    cipherResult.value = null
+    plainResult.value = null
+    plainInput.value = null
+    cipherInput.value = null
+    keyInput.value = null
 }
