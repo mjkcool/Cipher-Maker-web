@@ -9,6 +9,8 @@ const plainResult = document.getElementById("result-plain-txt")
 const plainInput = document.getElementById("plain-txt")
 const cipherInput = document.getElementById("cipher-txt")
 const clearBtn = document.getElementById("clear")
+const cipherCopyBtn = document.getElementById("copy-cipher-btn")
+const plainCopyBtn = document.getElementById("copy-plain-btn")
 const boardplace = document.querySelectorAll("td")
 
 let keyboard = Array.from(Array(KBSIZE), () => new Array(KBSIZE)) //암호판
@@ -21,6 +23,13 @@ if(keysetBtn) keysetBtn.addEventListener("click", keySet)
 if(encryption_btn) encryption_btn.addEventListener("click", encryption)
 if(decryption_btn) decryption_btn.addEventListener("click", decryption)
 if(clearBtn) clearBtn.addEventListener("click", clearAll)
+if(cipherCopyBtn) cipherCopyBtn.addEventListener("click", ()=>{copy(0)})
+if(plainCopyBtn) plainCopyBtn.addEventListener("click", ()=>{copy(1)})
+
+
+function copy(type){
+    
+}
 
 function removeDupplication(key){ //중복제거함수
     let newkey = ""
@@ -164,8 +173,10 @@ function encryption(){
         }
         
         fair_i += 2
+        cipher_txt += " "
     }
 
+    //결과 암호문 출력
     cipherResult.value = cipher_txt
 
     
