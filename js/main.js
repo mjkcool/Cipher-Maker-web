@@ -178,7 +178,6 @@ function encryption(){
 
     //결과 암호문 출력
     cipherResult.value = cipher_txt
-
     
 }
 
@@ -234,9 +233,10 @@ function clearAll(){
     //암호판 지우기
     for(let i=0; i<KBSIZE; i++){ 
         for(let j=0; j<KBSIZE; j++){
-            boardplace[idx++].value = null
+            boardplace[idx++].innerText = null
         }
     }
+
     //모든 input 칸 지우기
     cipherResult.value = null
     plainResult.value = null
