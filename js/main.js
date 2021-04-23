@@ -18,18 +18,36 @@ let key, raw_key
 
 let key_exi = false //암호키 입력 여부
 
+
+
 //리스너 추가
 if(keysetBtn) keysetBtn.addEventListener("click", keySet)
 if(encryption_btn) encryption_btn.addEventListener("click", encryption)
 if(decryption_btn) decryption_btn.addEventListener("click", decryption)
 if(clearBtn) clearBtn.addEventListener("click", clearAll)
-if(cipherCopyBtn) cipherCopyBtn.addEventListener("click", ()=>{copy(0)})
-if(plainCopyBtn) plainCopyBtn.addEventListener("click", ()=>{copy(1)})
+if(cipherCopyBtn) cipherCopyBtn.addEventListener("click", copyCipher)
+if(plainCopyBtn) plainCopyBtn.addEventListener("click", copyPlain)
 
 
-function copy(type){
-    
+
+function copyCipher(){
+    cipherResult.select()
+    document.execCommand("copy")
+    alert("Copied!")
 }
+function copyPlain(){
+    plainResult.select()
+    document.execCommand("copy")
+    alert("Copied!")
+}
+
+
+
+function resize(obj) { //textarea 사이즈 자동 조절
+    obj.style.height = "1px";
+    obj.style.height = (5+obj.scrollHeight)+"px";
+}
+
 
 function removeDupplication(key){ //중복제거함수
     let newkey = ""
@@ -118,8 +136,8 @@ function keySet(){ //make key board
 }
 
 
+//암호화 함수
 function encryption(){
-    let raw_plain
 
     if(!key_exi){ //키 입력 확인
         alert("Input key")
@@ -133,11 +151,71 @@ function encryption(){
         return
     }
 
-    raw_plain = plainInput.value
+    const raw_plain = plainInput.value
 
     plain = plain.toUpperCase() //대문자 변환
     plain = processPlainTxt(plain) //중복문자&홀수종료 뒤 X 대입
 
+    let playfairProcessed = PlayfairProcessing(plain)
+    //결과 암호문 출력
+    cipherResult.value = playfairProcessed.slice(0, playfairProcessed.length-1)
+
+    resize(cipherResult)
+    
+}
+
+function getIndex(c){
+    for(let i=0; i<KBSIZE; i++){
+        for(let j=0; j<KBSIZE; j++){
+            if(keyboard[i][j].includes(c)) {
+                return [i, j]
+            }
+        }
+    }
+}
+
+
+function processPlainTxt(text){
+    let i
+    let newstr = ''
+
+    newstr += text[0]
+    for(i = 1; i < text.length; i++){
+        if(text[i-1] == text[i] && i%2==1){ //전 문자와 중복되며 쌍자의 두번째이면
+            newstr += 'X'
+        }
+        newstr += text[i]
+    }
+    if(newstr.length % 2==1){ //홀수자일시 마지막에 x대입
+        newstr += 'X'
+    }
+    return newstr
+}
+
+//복호화 함수
+function decryption(){
+    if(!key_exi){ //키 입력 확인
+        alert("Input key")
+        return
+    }
+
+    //암호문 입력 확인
+    let cipher = cipherInput.value.replace(/(\s*)/g, "") //스페이스 제거
+    if(!cipher) {
+        alert("Input cipher text")
+        return
+    }
+    
+    const raw_cipher = cipherInput.value
+
+    cipher.toUpperCase() //대문자 변환
+    
+
+
+}
+
+//keyboard를 사용한 변환
+function PlayfairProcessing(plain){
     let cipher_txt = '' //암호문
     let fair_i = 0
 
@@ -175,56 +253,7 @@ function encryption(){
         fair_i += 2
         cipher_txt += " "
     }
-
-    //결과 암호문 출력
-    cipherResult.value = cipher_txt
-    
-}
-
-function getIndex(c){
-    for(let i=0; i<KBSIZE; i++){
-        for(let j=0; j<KBSIZE; j++){
-            if(keyboard[i][j].includes(c)) {
-                return [i, j]
-            }
-        }
-    }
-}
-
-
-function processPlainTxt(text){
-    let i
-    let newstr = ''
-
-    newstr += text[0]
-    for(i = 1; i < text.length; i++){
-        if(text[i-1] == text[i] && i%2==1){ //전 문자와 중복되며 쌍자의 두번째이면
-            newstr += 'X'
-        }
-        newstr += text[i]
-    }
-    if(newstr.length % 2==1){ //홀수자일시 마지막에 x대입
-        newstr += 'X'
-    }
-    return newstr
-}
-
-
-function decryption(){
-    if(!key_exi){ //키 입력 확인
-        alert("Input key")
-        return
-    }
-    let raw_cipher = cipherInput.value
-
-    //암호문 입력 확인
-    let cipher = cipherInput.value.replace(/(\s*)/g, "") //스페이스 제거
-    if(!cipher) {
-        alert("Input cipher text")
-        return
-    }
-    cipher.toUpperCase() //대문자 변환
-    
+    return cipher_txt
 
 }
 

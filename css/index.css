@@ -42,6 +42,8 @@ h1{
 textarea{
   background-color: rgb(60, 67, 82) !important;
   color: white !important;
+
+  /* overflow: hidden; */
 }
 
 #plain-txt-btn:hover{
