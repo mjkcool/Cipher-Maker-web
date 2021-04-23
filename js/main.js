@@ -205,24 +205,25 @@ function decryption(){
         alert("Input cipher text")
         return
     }
-    
     const raw_cipher = cipherInput.value
 
     cipher.toUpperCase() //대문자 변환
+    let playfairProcessed = PlayfairProcessing(cipher)
+    //결과 평문 출력
+    plainResult.value = (playfairProcessed.slice(0, playfairProcessed.length-1)).toLowerCase()
     
-
-
+    resize(plainResult)
 }
 
 //keyboard를 사용한 변환
-function PlayfairProcessing(plain){
+function PlayfairProcessing(text){
     let cipher_txt = '' //암호문
     let fair_i = 0
 
-    while(fair_i < plain.length){
+    while(fair_i < text.length){
         // var = [row, col]
-        let left = getIndex(plain[fair_i])
-        let right = getIndex(plain[fair_i + 1])
+        let left = getIndex(text[fair_i])
+        let right = getIndex(text[fair_i + 1])
         //alert(`한세트 ${left} ${right}`)
 
         //어차피 같을 일이 없기 때문에 두개를 각각 비교>> 만약 행렬중 하나 인덱스가 같다면
