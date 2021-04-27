@@ -212,13 +212,13 @@ function decryption(){
     playfairProcessed = playfairProcessed.slice(0, playfairProcessed.length-1)//.toLowerCase()
     let newProcessed = ''
     //중복 문자열 돌려놓기
-    for(let i=0; i<playfairProcessed.length; i+=2){
-        if(i != playfairProcessed.length-2 && playfairProcessed[i+1].includes('X')
-        && playfairProcessed[i] == playfairProcessed[i+2]/*다음 쌍자 왼쪽칸*/){
-            //마지막 두 요소가 아니며 현재 투피스의 두번째 요소가 x인 경우
-            newProcessed += playfairProcessed[i]
-        }else newProcessed += playfairProcessed[i] + playfairProcessed[i+1]
-    }
+    // for(let i=0; i<playfairProcessed.length; i+=2){
+    //     if(i != playfairProcessed.length-2 && playfairProcessed[i+1].includes('X')
+    //     && playfairProcessed[i] == playfairProcessed[i+2]/*다음 쌍자 왼쪽칸*/){
+    //         //마지막 두 요소가 아니며 현재 투피스의 두번째 요소가 x인 경우
+    //         newProcessed += playfairProcessed[i]
+    //     }else newProcessed += playfairProcessed[i] + playfairProcessed[i+1]
+    // }
     
     
 

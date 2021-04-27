@@ -79,7 +79,7 @@ public class mirim {
 		ArrayList<char[]> playFair = new ArrayList<char[]>(); //바꾸기 전 쌍자암호를 저장할 곳
 		ArrayList<char[]> decPlayFair = new ArrayList<char[]>(); //바꾼 후의 쌍자암호 저장할 곳
 		int x1 = 0 , x2 = 0 , y1 = 0, y2 = 0; //쌍자 암호 두 글자의 각각의 행,열 값
-		String decStr ="";
+		String decStr = "";
 
 		int lengthOddFlag = 1;
 		
@@ -148,10 +148,10 @@ public class mirim {
 		}
 		
 		
-		
+		//zCheck == String
 		for(int i = 0 ; i < zCheck.length() ; i++ )//z위치 찾아서 q로 돌려놓음
 		{
-			if( zCheck.charAt(i) == '1' ) 
+			if( zCheck.charAt(i) == '1' ) //i는 z의 위치!
 				decStr = decStr.substring(0,i)+'z'+decStr.substring(i+1,decStr.length());
 			
 		}
