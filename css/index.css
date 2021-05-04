@@ -39,7 +39,7 @@ h1{
   color: white;
 }
 
-textarea{
+textarea, #inputZposition{
   background-color: rgb(60, 67, 82) !important;
   color: white !important;
 

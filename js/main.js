@@ -198,6 +198,11 @@ function decryption(){
         alert("Input key")
         return
     }
+    /*
+    let isOdd
+    const oddradios = document.getElementById('oddcheck')
+    if(oddradios.checked) isOdd = true
+    */
 
     //암호문 입력 확인
     let cipher = cipherInput.value.replace(/(\s*)/g, "") //스페이스 제거
@@ -209,24 +214,37 @@ function decryption(){
 
     cipher.toUpperCase() //대문자 변환
     let playfairProcessed = PlayfairProcessing(cipher)
-    playfairProcessed = playfairProcessed.slice(0, playfairProcessed.length-1)//.toLowerCase()
-    let newProcessed = ''
+    playfairProcessed = playfairProcessed.slice(0, playfairProcessed.length-1)
+
+    plainResult.value = playfairProcessed.toLowerCase()
+    resize(plainResult)
+    return
+
+    
+    let newProcessed = playfairProcessed[0]
+
+    
     //중복 문자열 돌려놓기
-    // for(let i=0; i<playfairProcessed.length; i+=2){
-    //     if(i != playfairProcessed.length-2 && playfairProcessed[i+1].includes('X')
-    //     && playfairProcessed[i] == playfairProcessed[i+2]/*다음 쌍자 왼쪽칸*/){
-    //         //마지막 두 요소가 아니며 현재 투피스의 두번째 요소가 x인 경우
-    //         newProcessed += playfairProcessed[i]
-    //     }else newProcessed += playfairProcessed[i] + playfairProcessed[i+1]
-    // }
+    for(let i=2; i<playfairProcessed.length; i+=2){
+        if(playfairProcessed[i].includes('X') && playfairProcessed[i-1] == playfairProcessed[i]/*다음 쌍자 왼쪽칸*/){
+            //마지막 두 요소가 아니며 현재 투피스의 두번째 요소가 x인 경우
+            newProcessed += playfairProcessed[i]
+        }else newProcessed += playfairProcessed[i-1] + playfairProcessed[i]
+    }
     
-    
+    //z 위치 돌려놓기
+    const zindex = document.getElementById(inputZposition).value != null ? document.getElementById(inputZposition).value != null - 1 : -1
+    if (zindex >= 0) {
+        newProcessed = newProcessed.substring(0,zindex)+'z'+newProcessed.substring(zindex+1, newProcessed.length())
+    }
+    newProcessed = newProcessed.toLowerCase()
 
 
-    //결과 평문 출력
-    plainResult.value = newProcessed
+    //홀수 짝수 판별 후 결과 평문 출력
+    plainResult.value = isOdd ? newProcessed.slice(0, newProcessed.length-2) : newProcessed
     
     resize(plainResult)
+    
 }
 
 //keyboard를 사용한 변환

@@ -42,7 +42,7 @@ public class mirim {
 				str = str.substring(0,i)+'q'+str.substring(i+1,str.length());
 				zCheck+=1;
 			}
-			else 
+			else
 			{
 				zCheck+=0;
 			}
