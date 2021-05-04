@@ -35,12 +35,6 @@ function copyCipher(){
     document.execCommand("copy")
     alert("Copied!")
 }
-function copyPlain(){
-    plainResult.select()
-    document.execCommand("copy")
-    alert("Copied!")
-}
-
 
 
 function resize(obj) { //textarea 사이즈 자동 조절
@@ -215,11 +209,11 @@ function decryption(){
     cipher.toUpperCase() //대문자 변환
     let playfairProcessed = PlayfairProcessing(cipher)
     playfairProcessed = playfairProcessed.slice(0, playfairProcessed.length-1)
+    playfairProcessed = plainInput.value
 
-    plainResult.value = playfairProcessed.toLowerCase()
+    plainResult.value = playfairProcessed
     resize(plainResult)
     return
-
     
     let newProcessed = playfairProcessed[0]
 
